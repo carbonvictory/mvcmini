@@ -9,6 +9,14 @@
 
 class Route {
 
+	/**
+	 * Wrapper for the Router class's define_route method.
+	 *
+	 * @access  public
+	 * @param   string   $uri
+	 * @param   closure  $controller_logic
+	 * @return  void
+	 */
 	public static function make($uri, $controller_logic) {
 		Router::define_route($uri, $controller_logic);
 	}
