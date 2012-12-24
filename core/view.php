@@ -14,6 +14,9 @@
 *      // loads the view called view_name.php
 *      Route::make('view_name');
 *
+*      // loads the view called test.php in the views/ subfolder common/
+*      Route::mark('common/test');
+*
 *      // loads the view called view_name.php and creates
 *      // a variable $foo with a value of 'test' that can
 *      // be used in the view
@@ -43,7 +46,7 @@ class View {
 		if ( ! file_exists($view_path))
 		{
 			header('HTTP/1.1 500 Server Error');
-			die("Missing view '$view_name'");
+			die("Missing view '$view_path'");
 		}
 		require_once $view_path;
 	}
