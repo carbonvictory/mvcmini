@@ -15,7 +15,7 @@
 *      Route::make('view_name');
 *
 *      // loads the view called test.php in the views/ subfolder common/
-*      Route::mark('common/test');
+*      Route::make('common/test');
 *
 *      // loads the view called view_name.php and creates
 *      // a variable $foo with a value of 'test' that can
@@ -42,7 +42,7 @@ class View {
 	{
 		if (is_array($data)) extract($data);
 		
-		$view_path = APP_PATH . 'views/' . static::_clean($view_name) . '.php';
+		$view_path = VIEWS_DIR . static::_clean($view_name) . '.php';
 		if ( ! file_exists($view_path))
 		{
 			header('HTTP/1.1 500 Server Error');

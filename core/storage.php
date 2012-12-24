@@ -10,8 +10,6 @@
 * Data stored by mvcMini is serialize()d, allowing you to keep
 * strings, numbers, PHP arrays, or objects.
 *
-* Storage keys may only contain letters, numbers, and underscores.
-*
 * <code>
 *
 *      // storing data
@@ -39,7 +37,7 @@ class Storage {
 	 */
 	public static function get($key)
 	{
-		return unserialize(@file_get_contents(STORAGE_PATH . static::_clean($key)));
+		return unserialize(file_get_contents(STORAGE_DIR . md5($key)));
 	}
 	
 	/**
@@ -51,7 +49,7 @@ class Storage {
 	 */
 	public static function put($key, $value = '')
 	{
-		file_put_contents(STORAGE_PATH . static::_clean($key), serialize($value));
+		file_put_contents(STORAGE_DIR . md5($key), serialize($value));
 	}
 	
 	/**
@@ -62,19 +60,7 @@ class Storage {
 	 */
 	public static function remove($key)
 	{
-		@unlink(STORAGE_PATH . static::_clean($key));
-	}
-	
-	/**
-	 * Sanitizes a data storage key by stripping out everything
-	 * but letters, numbers, and underscores.
-	 *
-	 * @param   string  $key
-	 * @return  string
-	 */
-	protected static function _clean($key)
-	{
-		return preg_replace('/[^\w]/', '', $key);
+		unlink(STORAGE_DIR . md5($key));
 	}
 
 }
