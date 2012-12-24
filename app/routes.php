@@ -20,5 +20,6 @@
 
 Route::make('/', function()
 {
+	Storage::remove('test');
 	View::make('welcome');
 });
