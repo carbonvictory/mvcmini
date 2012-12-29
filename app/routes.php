@@ -1,24 +1,50 @@
 <?php 
 
-// --------------------------------------------------------------
-// Define your routes and controller methods here.
-//
-// 		Route::make($uri, $controller_logic);
-//
-// 		Route::make('uri/segments', function() 
-// 		{
-// 			// controller logic
-// 		});
-//
-// Wildcard values passed to controller in order of appearance.
-// 
-// 		Route::make('articles/(:num)', function($id)
-// 		{
-// 			// value of (:num) supplied as $id
-// 		});
-// --------------------------------------------------------------
+/**
+ * Define your routes and controller methods here.
+ * You may define a route for any valid URI, WITHOUT leading or trailing slashes.
+ *
+ * Routes are resolved from first to last, so put more specific routes first.
+ * When a page request is made that matches one of your defined routes, that route's 
+ * closure is executed. This can include showing views, importing logic modules, or
+ * anything else you can normally do with PHP. 
+ *
+ * <code>
+ *
+ *      Route::set('uri/segments', function() 
+ *      {
+ *           // controller logic
+ *      });
+ *
+ * <code>
+ *
+ * You also have access to three wildcard tokens:
+ * <ul>
+ *      <li>(:num) - matches numbers only
+ *      <li>(:abc) - matches letters only
+ *      <li>(:any) - matches letters, numbers, dashes, plus signs, periods and underscores
+ * </ul>
+ *
+ * Wildcard values are passed to controller in order of their appearance
+ * in the route URI.
+ * 
+ * <code>
+ *
+ *      Route::set('articles/(:num)/(:abc)', function($id, $slug)
+ *      {
+ *           // value of (:num) supplied as $id
+ *           // value of (:abc) supplied as $slug
+ *      });
+ *
+ * </code>
+ */
 
-Route::make('/', function()
+Route::set('/', function()
 {
-	View::make('welcome');
+	// You MUST define a route for this URI ('/'), though you're free to change
+	// this controller's logic and any views rendered.
+	// Your site will default to this route if the user does not supply a URI, 
+	// such as when visiting your site's home page (ex. http://yoursite.com/).
+	
+	View::show('welcome');
 });

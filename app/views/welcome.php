@@ -3,6 +3,7 @@
 <head>
 
 	<title>mvcMini</title>
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
 	<link rel="stylesheet" href="<?=CSS_DIR?>welcome.css" media="screen">
 
 </head>

@@ -20,20 +20,21 @@ article {
 h1 {
 	border-bottom:1px #eee solid;
 	color:#666;
-	font-family:Segoe UI Light, Helvetica, Arial, sans-serif;
+	font-family:'Open Sans', Helvetica, Arial, sans-serif;
 	font-size:150%;
+	font-weight:normal;
 	margin-bottom:40px;
 	padding-bottom:20px
 }
 
 h1 span { 
-	color:#6f5987;
+	color:#9267c0;
 	font-family:inherit
 }
 
 p {
 	color:#333;
-	font-family:Segoe UI, Helvetica, Arial, sans-serif;
+	font-family:'Open Sans', Helvetica, Arial, sans-serif;
 	font-size:92%;
 	margin-bottom:20px
 }

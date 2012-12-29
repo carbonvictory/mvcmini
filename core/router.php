@@ -1,98 +1,175 @@
 <?php
 
-// --------------------------------------------------------------
-// The abstract class Route enables the creation of routes and
-// route controller functions in app/routes.php.
-//
-// Route::make() is a wrapper for Router::define_route().
-// --------------------------------------------------------------
-
+/**
+ * The Route class enables the creation of routes and route controller
+ * functions in /app/routes.php.
+ *
+ * @package		mvcMini
+ * @author		Scott A. Murray <design@carbonvictory.com>
+ */
 class Route {
 
 	/**
 	 * Wrapper for the Router class's define_route method.
 	 *
-	 * @access  public
 	 * @param   string   $uri
 	 * @param   closure  $controller_logic
 	 * @return  void
 	 */
-	public static function make($uri, $controller_logic) {
+	public static function set($uri, $controller_logic) {
 		Router::define_route($uri, $controller_logic);
+	}
+	
+	/**
+	 * Wrapper for the Router class's redirect method.
+	 *
+	 * @param   string   $uri
+	 * @return  void
+	 */
+	public static function redirect($destination_uri = '')
+	{
+		Router::redirect($destination_uri);
 	}
 
 }
 
-// --------------------------------------------------------------
-// The Router class is the backbone of the framework.
-// --------------------------------------------------------------
-
+/**
+ * The Router class directs page requests, validates and sets routes
+ * defined in /app/routes.php, and executes controller functions.
+ *
+ * @package		mvcMini
+ * @author		Scott A. Murray <design@carbonvictory.com>
+ */
 class Router {
 	
-	protected static $routes = array();
-	protected static $controller_params = array();
-	protected static $controller_function = NULL;
+	/**
+	 * Stores all the defined routes for the site and their 
+	 * controller functions.
+	 *
+	 * @var array
+	 */
+	private static $routes = array();
 	
-	protected static $wildcards = array(
+	/**
+	 * Stores the parameters passed to the current request's controller.
+	 *
+	 * @var array
+	 */
+	private static $controller_params = array();
+	
+	/**
+	 * Stores the current request's controller function.
+	 *
+	 * @var closure
+	 */
+	private static $controller_function = NULL;
+	
+	/**
+	 * Stores the available route URI wildcards.
+	 *
+	 * @var array
+	 */
+	private static $wildcards = array(
 		'(:num)',
 		'(:abc)',
 		'(:any)'
 	);
 	
-	protected static $regexes = array(
+	/**
+	 * Stores the regexes to which the above wildcards are converted.
+	 * Defined in the same order as the wildcards above.
+	 *
+	 * @var array
+	 */
+	private static $regexes = array(
 		'([\d]+)',
-		'([\A-Za-z]+)',
-		'([\w]+)'
+		'([A-z]+)',
+		'([\w\+\-\.]+)'
 	);
 	
+	/**
+	 * Validates and defines a route declared in /app/routes.php.
+	 *
+	 * @param   string    $uri
+	 * @param   closure   $controller_logic
+	 * @return  void
+	 */
 	public static function define_route($uri, $controller_logic = NULL)
 	{
-		if ( ! static::_is_valid_controller($controller_logic)) { 
-			header('HTTP/1.1 500');
-			die("Invalid controller method defined for route '$uri'");
-		}
-		$clean_uri = preg_replace('/[^\w\/\(\)\:]/', '', $uri);
-		static::$routes[$clean_uri] = $controller_logic;
+		if ( ! self::_is_valid_controller($controller_logic)) error(500, "Invalid controller for '$uri'");
+		self::$routes[self::_clean($uri)] = $controller_logic;
 	}
 	
+	/**
+	 * Routes the current page request.
+	 * If a route has been defined for the given URI, call its associated
+	 * controller function. If no route is found, throw a 404 error.
+	 *
+	 * If no URI is passed, default to the home route ('/');
+	 *
+	 * @param   string    $uri
+	 * @param   closure   $controller_logic
+	 * @return  void
+	 */
 	public static function route_request($uri)
 	{
 		if ($uri === NULL)
 		{
-			call_user_func_array(static::$routes['/'], static::$controller_params);
+			call_user_func_array(self::$routes['/'], self::$controller_params);
 		}
 		else
 		{
-			if ( ! static::_match_route(rtrim($uri, '/')))
-			{
-				header('HTTP/1.1 404');
-				die();
-			}
+			if ( ! self::_match_route(rtrim($uri, '/'))) error(404);
 			
 			ob_start();
-			call_user_func_array(static::$controller_function, static::$controller_params);
+			call_user_func_array(self::$controller_function, self::$controller_params);
 			ob_end_flush();
 		}
 	}
 	
-	protected static function _has_routes()
+	/**
+	 * Redirects to the given URI.
+	 *
+	 * @param   string   $destination_uri
+	 * @return  void
+	 */
+	public static function redirect($destination_uri = '')
 	{
-		return !empty(static::$routes);
+		header('Location:' . BASE_PATH . $destination_uri);
+		exit();
 	}
 	
-	protected static function _match_route($uri)
+	/**
+	 * Checks if any routes were defined for the site.
+	 *
+	 * @return bool
+	 */
+	private static function _has_routes()
 	{
-		if (static::_has_routes())
+		return ( ! empty(self::$routes));
+	}
+	
+	/**
+	 * Attempts to match the current page request with one of the defined routes.
+	 * Returns TRUE if a match was made and parameters/closure were set,
+	 * FALSE if not match could be found.
+	 *
+	 * @param   string   $uri
+	 * @return  bool
+	 */
+	private static function _match_route($uri)
+	{
+		if (self::_has_routes())
 		{
-			foreach (static::$routes as $route_uri => $controller_logic)
+			foreach (self::$routes as $route_uri => $controller_logic)
 			{
 				$pattern = '|^' . $route_uri . '$|';
-				$pattern = str_replace(static::$wildcards, static::$regexes, $pattern);
+				$pattern = str_replace(self::$wildcards, self::$regexes, $pattern);
 				
 				if (preg_match($pattern, $uri, $matches) > 0)
 				{
-					static::$controller_function = $controller_logic;
-					static::_set_params($matches);
+					self::$controller_function = $controller_logic;
+					self::_set_params($matches);
 					return TRUE;
 				}
 			}
@@ -101,15 +178,39 @@ class Router {
 		return FALSE;
 	}
 	
-	protected static function _set_params($matches)
+	/**
+	 * Sets the parameters to be passed to the current request's controller function.
+	 *
+	 * @param   array   $matches
+	 * @return  void
+	 */
+	private static function _set_params($matches)
 	{
 		array_shift($matches);
-		static::$controller_params = ( ! empty($matches)) ? $matches : array();
+		self::$controller_params = ( ! empty($matches)) ? $matches : array();
 	}
 	
-	protected static function _is_valid_controller($controller = NULL)
+	/**
+	 * Checks if the given controller function is a valid closure.
+	 *
+	 * @param   closure   $controller
+	 * @return  bool
+	 */
+	private static function _is_valid_controller($controller = NULL)
 	{
-		return (is_callable($controller) AND $controller !== NULL);
+		return ( ! is_null($controller) AND is_callable($controller));
+	}
+	
+	/**
+	 * Sanitizes a route URI by stripping out everythinb but letters, numbers,
+	 * underscores, forward slashes, colons, plus signs, dashes, and parentheses.
+	 *
+	 * @param   string   $uri
+	 * @return  bool
+	 */
+	private static function _clean($uri)
+	{
+		return preg_replace('/[^\w\/\(\)\:\+\-]/', '', $uri);
 	}
 
 }

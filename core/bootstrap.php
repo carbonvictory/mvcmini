@@ -1,12 +1,13 @@
 <?php
 
 // ----------------------------------------------------------------------------
-// Load the view, logic, and storage handlers.
+// Load the view, logic, and storage, and error handlers.
 // ----------------------------------------------------------------------------
 
 require_once 'view.php';
 require_once 'logic.php';
 require_once 'storage.php';
+require_once 'error.php';
 
 // ----------------------------------------------------------------------------
 // Init request router.

@@ -30,8 +30,8 @@ define('BASE_PATH',	'http://localhost:8080/mvcmini/www/');
 define('ASSET_DIR',	BASE_PATH . 'assets/');
 
 define('IMAGE_DIR', ASSET_DIR . 'img/');
-define('CSS_DIR',	ASSET_DIR . 'css/');
-define('JS_DIR', 	ASSET_DIR . 'js/');
+define('CSS_DIR',   ASSET_DIR . 'css/');
+define('JS_DIR',    ASSET_DIR . 'js/');
 
 // ----------------------------------------------------------------------------
 // Define path to /app folder relative to /www directory, WITH trailing slash.
@@ -49,9 +49,9 @@ define('CORE_PATH',	'../core/');
 // Define path to view, logic, and storage directories, WITH trailing slash.
 // ----------------------------------------------------------------------------
 
-define('VIEWS_DIR',		APP_PATH . 'views/');
-define('LOGIC_DIR',		APP_PATH . 'logic/');
-define('STORAGE_DIR',	APP_PATH . 'storage/');
+define('VIEWS_DIR',   APP_PATH . 'views/');
+define('LOGIC_DIR',	  APP_PATH . 'logic/');
+define('STORAGE_DIR', APP_PATH . 'storage/');
 
 // ----------------------------------------------------------------------------
 // Start mvcMini.
