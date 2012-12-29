@@ -1,7 +1,7 @@
 <?php
 
 /**
- * mvcMini - An MVC skeleton for very small PHP projects.
+ * mvcMini - An MVC skeleton framework for very small PHP projects.
  *
  * @package  mvcMini
  * @version  1.0
