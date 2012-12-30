@@ -201,7 +201,7 @@ class Router {
 	}
 	
 	/**
-	 * Sanitizes a route URI by stripping out everythinb but letters, numbers,
+	 * Sanitizes a route URI by stripping out everything but letters, numbers,
 	 * underscores, forward slashes, colons, plus signs, dashes, and parentheses.
 	 *
 	 * @param   string   $uri
