@@ -108,12 +108,11 @@ class Router {
 	 * If no URI is passed, default to the home route ('/');
 	 *
 	 * @param   string    $uri
-	 * @param   closure   $controller_logic
 	 * @return  void
 	 */
 	public static function route_request($uri)
 	{
-		if ($uri === NULL)
+		if (is_null($uri))
 		{
 			call_user_func_array(self::$routes['/'], self::$controller_params);
 		}
@@ -152,7 +151,7 @@ class Router {
 	/**
 	 * Attempts to match the current page request with one of the defined routes.
 	 * Returns TRUE if a match was made and parameters/closure were set,
-	 * FALSE if not match could be found.
+	 * FALSE if no match could be found.
 	 *
 	 * @param   string   $uri
 	 * @return  bool
