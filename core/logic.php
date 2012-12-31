@@ -6,7 +6,7 @@
  * Since mvcMini is geared toward very small web projects, it
  * does not differentiate between models, libraries, helpers,
  * or extensions. Instead, application logic is stored in
- * modules in the /app/logic/ directory. Each module is a
+ * modules in the app/logic directory. Each module is a
  * self-contined class that contains one or more properties
  * or methods encapsulating some of the site's business logic.
  *
@@ -17,8 +17,8 @@
  * For example, a logic module named validation.php must
  * only contain a class called Validation_logic.
  *
- * In a route controller, you can call Logic::import($module),
- * passing the name of the logic module to the function. You
+ * In a route controller, you can call Logic::import(),
+ * passing the name of the logic file to the function. You
  * can optionally pass any configuration parameters as an array,
  * which will get passed to any class constructors (as an array). 
  * Doing so allows you to access the loaded logic module in a 
@@ -84,8 +84,8 @@ class Logic {
 	 *
 	 * Second parameter $parameters is unused, but required as per __callStatic().
 	 *
-	 * @param   string  $module_name
-	 * @return  object
+	 * @param   string   $module_name
+	 * @return  mixed
 	 */
 	public static function __callStatic($module_name, $parameters = NULL)
 	{
@@ -98,8 +98,7 @@ class Logic {
 	}
 	
 	/**
-	 * Sanitizes a module name by stripping out everything but
-	 * letters, numbers, underscores, and forward slashes.
+	 * Sanitizes a module name.
 	 *
 	 * @param   string  $module_name
 	 * @param   array   $params

@@ -2,7 +2,7 @@
 
 /**
  * The Route class enables the creation of routes and route controller
- * functions in /app/routes.php.
+ * functions in app/routes.php.
  *
  * @package		mvcMini
  * @author		Scott A. Murray <design@carbonvictory.com>
@@ -10,7 +10,7 @@
 class Route {
 
 	/**
-	 * Wrapper for the Router class's define_route method.
+	 * Wrapper for the Router class's define_route() method.
 	 *
 	 * @param   string   $uri
 	 * @param   closure  $controller_logic
@@ -21,12 +21,12 @@ class Route {
 	}
 	
 	/**
-	 * Wrapper for the Router class's redirect method.
+	 * Wrapper for the Router class's redirect() method.
 	 *
 	 * @param   string   $uri
 	 * @return  void
 	 */
-	public static function redirect($destination_uri = '')
+	public static function redirect($destination_uri)
 	{
 		Router::redirect($destination_uri);
 	}
@@ -35,7 +35,7 @@ class Route {
 
 /**
  * The Router class directs page requests, validates and sets routes
- * defined in /app/routes.php, and executes controller functions.
+ * defined in app/routes.php, and executes controller functions.
  *
  * @package		mvcMini
  * @author		Scott A. Murray <design@carbonvictory.com>
@@ -88,15 +88,15 @@ class Router {
 	);
 	
 	/**
-	 * Validates and defines a route declared in /app/routes.php.
+	 * Validates and defines a route declared in app/routes.php.
 	 *
 	 * @param   string    $uri
 	 * @param   closure   $controller_logic
 	 * @return  void
 	 */
-	public static function define_route($uri, $controller_logic = NULL)
+	public static function define_route($uri, $controller_logic)
 	{
-		if ( ! self::_is_valid_controller($controller_logic)) error(500, "Invalid controller for '$uri'");
+		if ( ! is_callable($controller_logic)) error(500, "Invalid controller for '$uri'");
 		self::$routes[self::_clean($uri)] = $controller_logic;
 	}
 	
@@ -110,7 +110,7 @@ class Router {
 	 * @param   string    $uri
 	 * @return  void
 	 */
-	public static function route_request($uri)
+	public static function route_request($uri = NULL)
 	{
 		if (is_null($uri))
 		{
@@ -132,9 +132,9 @@ class Router {
 	 * @param   string   $destination_uri
 	 * @return  void
 	 */
-	public static function redirect($destination_uri = '')
+	public static function redirect($destination_uri)
 	{
-		header('Location:' . BASE_PATH . $destination_uri);
+		header('Location:' . BASE_PATH . self::_clean($destination_uri));
 		exit();
 	}
 	
@@ -150,7 +150,7 @@ class Router {
 	
 	/**
 	 * Attempts to match the current page request with one of the defined routes.
-	 * Returns TRUE if a match was made and parameters/closure were set,
+	 * Returns TRUE if a match was made and its controller function was set up,
 	 * FALSE if no match could be found.
 	 *
 	 * @param   string   $uri
@@ -190,19 +190,7 @@ class Router {
 	}
 	
 	/**
-	 * Checks if the given controller function is a valid closure.
-	 *
-	 * @param   closure   $controller
-	 * @return  bool
-	 */
-	private static function _is_valid_controller($controller = NULL)
-	{
-		return ( ! is_null($controller) AND is_callable($controller));
-	}
-	
-	/**
-	 * Sanitizes a route URI by stripping out everything but letters, numbers,
-	 * underscores, forward slashes, colons, plus signs, dashes, and parentheses.
+	 * Sanitizes a route URI.
 	 *
 	 * @param   string   $uri
 	 * @return  bool

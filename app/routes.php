@@ -2,12 +2,12 @@
 
 /**
  * Define your routes and controller methods here.
- * You may define a route for any valid URI, WITHOUT leading or trailing slashes.
+ * You may define a route for any URI, WITHOUT leading or trailing slashes.
  *
- * Routes are resolved from first to last, so put more specific routes first.
+ * Routes are matched from first to last, so put more specific routes first.
  * When a page request is made that matches one of your defined routes, that route's 
  * closure is executed. This can include showing views, importing logic modules, or
- * anything else you can normally do with PHP. 
+ * anything else you can normally do with PHP.
  *
  * <code>
  *
@@ -25,8 +25,8 @@
  *      <li>(:any) - matches letters, numbers, dashes, plus signs, periods and underscores
  * </ul>
  *
- * Wildcard values are passed to controller in order of their appearance
- * in the route URI.
+ * Wildcard values are passed to the controller function in order of their 
+ * appearance in the route URI.
  * 
  * <code>
  *

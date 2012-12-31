@@ -14,7 +14,7 @@
  *      // loads the view called view_name.php
  *      View::show('view_name');
  *
- *      // loads the view called test.php in the /views subfolder /common
+ *      // loads the view called test.php in views/common
  *      View::show('common/test');
  *
  *      // loads the view called view_name.php and creates
@@ -56,13 +56,12 @@ class View {
 	}
 	
 	/**
-	 * Sanitizes a view name by stripping out everything but
-	 * letters, numbers, underscores, and forward slashes.
+	 * Sanitizes a view name.
 	 *
 	 * @param   string  $view_name
 	 * @return  string
 	 */
-	private static function _clean($view_name = '')
+	private static function _clean($view_name)
 	{
 		return preg_replace('/[^\w\/]/', '', $view_name);
 	}
