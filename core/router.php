@@ -16,7 +16,8 @@ class Route {
 	 * @param   closure  $controller_logic
 	 * @return  void
 	 */
-	public static function set($uri, $controller_logic) {
+	public static function set($uri, $controller_logic)
+	{
 		Router::define_route($uri, $controller_logic);
 	}
 	

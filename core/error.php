@@ -23,6 +23,8 @@
  */
 function error($status = 500, $message = NULL)
 {
+	$status = preg_replace('/[^\d]/', '', $status);
+	
 	header("HTTP/1.1 $status");
 	die($message);
 }
