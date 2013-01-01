@@ -23,8 +23,8 @@
  *
  * </code>
  *
- * @package		mvcMini
- * @author		Scott A. Murray <design@carbonvictory.com>
+ * @package  mvcMini
+ * @author   Scott A. Murray <design@carbonvictory.com>
  */
 class Storage {
 	

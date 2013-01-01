@@ -3,8 +3,8 @@
 /**
  * Error handler.
  *
- * @package		mvcMini
- * @author		Scott A. Murray <design@carbonvictory.com>
+ * @package  mvcMini
+ * @author   Scott A. Murray <design@carbonvictory.com>
  */
  
 /**
@@ -17,8 +17,8 @@
  *
  * </code>
  *
- * @param   HTTP status code   $status
- * @param   string             $message
+ * @param   HTTP status code  $status
+ * @param   string            $message
  * @return  void
  */
 function error($status = 500, $message = NULL)

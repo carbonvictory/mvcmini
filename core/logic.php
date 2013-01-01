@@ -42,8 +42,8 @@
  *
  * </code>
  *
- * @package		mvcMini
- * @author		Scott A. Murray <design@carbonvictory.com>
+ * @package  mvcMini
+ * @author   Scott A. Murray <design@carbonvictory.com>
  */
 class Logic {
 
@@ -83,7 +83,7 @@ class Logic {
 	 *
 	 * Second parameter $parameters is unused, but required as per __callStatic().
 	 *
-	 * @param   string   $module_name
+	 * @param   string  $module_name
 	 * @return  mixed
 	 */
 	public static function __callStatic($module_name, $parameters = NULL)

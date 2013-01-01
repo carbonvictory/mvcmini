@@ -4,8 +4,8 @@
  * The Route class enables the creation of routes and route controller
  * functions in app/routes.php.
  *
- * @package		mvcMini
- * @author		Scott A. Murray <design@carbonvictory.com>
+ * @package  mvcMini
+ * @author   Scott A. Murray <design@carbonvictory.com>
  */
 class Route {
 
@@ -24,7 +24,7 @@ class Route {
 	/**
 	 * Wrapper for the Router class's redirect() method.
 	 *
-	 * @param   string   $uri
+	 * @param   string  $uri
 	 * @return  void
 	 */
 	public static function redirect($destination_uri)
@@ -38,8 +38,8 @@ class Route {
  * The Router class directs page requests, validates and sets routes defined in
  * app/routes.php, and executes controller functions.
  *
- * @package		mvcMini
- * @author		Scott A. Murray <design@carbonvictory.com>
+ * @package  mvcMini
+ * @author   Scott A. Murray <design@carbonvictory.com>
  */
 class Router {
 	
@@ -90,8 +90,8 @@ class Router {
 	/**
 	 * Validates and defines a route declared in app/routes.php.
 	 *
-	 * @param   string    $uri
-	 * @param   closure   $controller_logic
+	 * @param   string   $uri
+	 * @param   closure  $controller_logic
 	 * @return  void
 	 */
 	public static function define_route($uri, $controller_logic)
@@ -107,7 +107,7 @@ class Router {
 	 *
 	 * If no URI is passed, default to the home route ('/');
 	 *
-	 * @param   string    $uri
+	 * @param   string  $uri
 	 * @return  void
 	 */
 	public static function route_request($uri = NULL)
@@ -129,7 +129,7 @@ class Router {
 	/**
 	 * Redirects to the given URI.
 	 *
-	 * @param   string   $destination_uri
+	 * @param   string  $destination_uri
 	 * @return  void
 	 */
 	public static function redirect($destination_uri)
@@ -153,7 +153,7 @@ class Router {
 	 * Returns TRUE if a match was made and its controller function was set up,
 	 * FALSE if no match could be found.
 	 *
-	 * @param   string   $uri
+	 * @param   string  $uri
 	 * @return  bool
 	 */
 	private static function _match_route($uri)
@@ -181,7 +181,7 @@ class Router {
 	 * Sets the parameters to be passed to the current request's controller
 	 * function.
 	 *
-	 * @param   array   $matches
+	 * @param   array  $matches
 	 * @return  void
 	 */
 	private static function _set_params($matches)
@@ -193,7 +193,7 @@ class Router {
 	/**
 	 * Sanitizes a route URI.
 	 *
-	 * @param   string   $uri
+	 * @param   string  $uri
 	 * @return  bool
 	 */
 	private static function _clean($uri)
