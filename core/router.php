@@ -35,8 +35,8 @@ class Route {
 }
 
 /**
- * The Router class directs page requests, validates and sets routes
- * defined in app/routes.php, and executes controller functions.
+ * The Router class directs page requests, validates and sets routes defined in
+ * app/routes.php, and executes controller functions.
  *
  * @package		mvcMini
  * @author		Scott A. Murray <design@carbonvictory.com>
@@ -44,8 +44,7 @@ class Route {
 class Router {
 	
 	/**
-	 * Stores all the defined routes for the site and their 
-	 * controller functions.
+	 * Stores the defined routes for the site and their controller functions.
 	 *
 	 * @var array
 	 */
@@ -179,7 +178,8 @@ class Router {
 	}
 	
 	/**
-	 * Sets the parameters to be passed to the current request's controller function.
+	 * Sets the parameters to be passed to the current request's controller
+	 * function.
 	 *
 	 * @param   array   $matches
 	 * @return  void

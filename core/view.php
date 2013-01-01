@@ -3,11 +3,10 @@
 /**
  * View handler.
  *
- * Views are invoked in a controller function by calling
- * View::show(), with the name of the view as the first argument.
+ * Views are invoked in a controller function by calling View::show(), with the
+ * name of the view as the first argument.
  *
- * An array of data can optionally be passed - the array values 
- * are extract()ed.
+ * An array of data can optionally be passed - the array values are extract()ed.
  *
  * <code>
  *

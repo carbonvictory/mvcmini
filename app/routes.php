@@ -5,9 +5,9 @@
  * You may define a route for any URI, WITHOUT leading or trailing slashes.
  *
  * Routes are matched from first to last, so put more specific routes first.
- * When a page request is made that matches one of your defined routes, that route's 
- * closure is executed. This can include showing views, importing logic modules, or
- * anything else you can normally do with PHP.
+ * When a page request is made that matches one of your defined routes, that 
+ * route's closure is executed. This can include showing views, importing logic
+ * modules, or anything else you can normally do with PHP.
  *
  * <code>
  *
@@ -19,10 +19,11 @@
  * <code>
  *
  * You also have access to three wildcard tokens:
+ *
  * <ul>
- *      <li>(:num) - matches numbers only
- *      <li>(:abc) - matches letters only
- *      <li>(:any) - matches letters, numbers, dashes, plus signs, periods and underscores
+ *      <li>(:num) matches numbers only
+ *      <li>(:abc) matches letters only
+ *      <li>(:any) matches letters, numbers, dashes, plusses, periods, underscores
  * </ul>
  *
  * Wildcard values are passed to the controller function in order of their 

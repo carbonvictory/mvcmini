@@ -3,12 +3,12 @@
 /**
  * Storage handler.
  *
- * Though mvcMini is intended for small projects with little
- * or no data storage needs, the framework does offer very
- * basic key-value filesystem-based storage should you need it.
+ * Though mvcMini is intended for small projects with little or no data storage
+ * needs, the framework does offer very basic key-value filesystem-based storage 
+ * should you need it.
  *
- * Data stored by mvcMini is serialize()d, allowing you to keep
- * strings, numbers, PHP arrays, or objects.
+ * Data stored by mvcMini is serialize()d, allowing you to keep strings, numbers, 
+ * PHP arrays, or objects.
  *
  * <code>
  *

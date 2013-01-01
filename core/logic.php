@@ -3,26 +3,25 @@
 /**
  * Logic handler.
  *
- * Since mvcMini is geared toward very small web projects, it
- * does not differentiate between models, libraries, helpers,
- * or extensions. Instead, application logic is stored in
- * modules in the app/logic directory. Each module is a
- * self-contined class that contains one or more properties
- * or methods encapsulating some of the site's business logic.
+ * Since mvcMini is geared toward very small web projects, it does not
+ * differentiate between models, libraries, helpers, or extensions. Instead,
+ * application logic is stored in modules in the app/logic directory. Each
+ * module is a self-contined class that contains one or more properties or 
+ * methods encapsulating some of the site's business logic.
  *
- * The class name must have only its first letter capitalized, 
- * have '_logic' at the end, and the file must share the 
- * class's name (without '_logic'), all lowercase. 
+ * The class name must have only its first letter capitalized, have '_logic' at
+ * the end, and the file must share the class's name (without '_logic'), 
+ * all lowercase. 
  * 
- * For example, a logic module named validation.php must
- * only contain a class called Validation_logic.
+ * For example, a logic module named validation.php must only contain a class
+ * called Validation_logic.
  *
- * In a route controller, you can call Logic::import(),
- * passing the name of the logic file to the function. You
- * can optionally pass any configuration parameters as an array,
- * which will get passed to any class constructors (as an array). 
- * Doing so allows you to access the loaded logic module in a 
- * route controller via Logic::module_name()->[...].
+ * In a route controller, you can call Logic::import(), passing the name of the
+ * logic file to the function. Doing so allows you to access the loaded logic 
+ * module in a route controller via Logic::module_name()->[...]. 
+ 
+ * You can optionally pass any configuration parameters as an array, which will
+ * get passed to any class constructors (also as an array). 
  *
  * <code>
  *
@@ -79,8 +78,8 @@ class Logic {
 	/**
 	 * Calls a logic module.
 	 *
-	 * Returns an object if the module has been loaded, throws a
-	 * 500 error if the module can't be found.
+	 * Returns an object if the module has been loaded, throws a 500 error if 
+	 * the module can't be found.
 	 *
 	 * Second parameter $parameters is unused, but required as per __callStatic().
 	 *
