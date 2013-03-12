@@ -46,9 +46,9 @@ class Router {
 	/**
 	 * Stores the current request URI.
 	 *
-	 * @var array
+	 * @var string
 	 */
-	public static $uri = '';
+	public static $uri = NULL;
 	
 	/**
 	 * Stores the defined routes for the site and their controller functions.
