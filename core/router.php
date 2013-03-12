@@ -42,6 +42,13 @@ class Route {
  * @author   Scott A. Murray <design@carbonvictory.com>
  */
 class Router {
+
+	/**
+	 * Stores the current request URI.
+	 *
+	 * @var array
+	 */
+	public static $uri = '';
 	
 	/**
 	 * Stores the defined routes for the site and their controller functions.
@@ -110,8 +117,10 @@ class Router {
 	 * @param   string  $uri
 	 * @return  void
 	 */
-	public static function route_request($uri = NULL)
+	public static function route_request()
 	{
+		$uri = self::_uri();
+
 		if (is_null($uri))
 		{
 			call_user_func_array(self::$routes['/'], self::$controller_params);
@@ -136,6 +145,25 @@ class Router {
 	{
 		header('Location:' . BASE_PATH . self::_clean($destination_uri));
 		exit();
+	}
+	
+	/**
+	 * Returns the current request URI.
+	 *
+	 * @return  string
+	 */
+	private static function _uri()
+	{
+		$basepath_tokens = explode('/', BASE_PATH);
+		$uri_tokens      = explode('/', $_SERVER['REQUEST_URI']);
+
+		foreach ($basepath_tokens as $basepath_token)
+		{
+			if (($key = array_search($basepath_token, $uri_tokens)) !== false)
+				unset($uri_tokens[$key]);
+		}
+		
+		return Router::$uri = ( ! empty($uri_tokens)) ? implode('/', $uri_tokens) : NULL;
 	}
 	
 	/**

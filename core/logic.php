@@ -89,9 +89,7 @@ class Logic {
 	public static function __callStatic($module_name, $parameters = NULL)
 	{
 		if (array_key_exists($module_name, self::$modules))
-		{
 			return self::$modules[$module_name];
-		}
 		
 		error(500, "Missing logic module '$module_name'");
 	}

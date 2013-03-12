@@ -10,7 +10,7 @@
  */
 
 // ----------------------------------------------------------------------------
-// Set error reporting. E_ALL in development, OFF in production.
+// Set error reporting. E_ALL in development, 0 in production.
 // ----------------------------------------------------------------------------
 
 ini_set('display_errors', E_ALL);

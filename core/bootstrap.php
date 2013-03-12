@@ -25,5 +25,4 @@ require_once APP_PATH . 'routes.php';
 // Route the request and call the appropriate controller.
 // ----------------------------------------------------------------------------
 
-$uri = (isset($_GET['mvcminiuri'])) ? $_GET['mvcminiuri'] : NULL;
-Router::route_request($uri);
+Router::route_request();
