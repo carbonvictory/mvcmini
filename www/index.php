@@ -4,7 +4,7 @@
  * mvcMini - An MVC skeleton framework for very small PHP projects.
  *
  * @package  mvcMini
- * @version  0.1.1
+ * @version  0.2.1
  * @author   Scott A. Murray <design@carbonvictory.com>
  * @link     http://github.com/carbonvictory/mvcmini
  */

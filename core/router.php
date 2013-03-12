@@ -119,15 +119,15 @@ class Router {
 	 */
 	public static function route_request()
 	{
-		$uri = self::_uri();
+		self::_set_uri();
 
-		if (is_null($uri))
+		if (is_null(self::$uri))
 		{
 			call_user_func_array(self::$routes['/'], self::$controller_params);
 		}
 		else
 		{
-			if ( ! self::_match_route(rtrim($uri, '/'))) error(404);
+			if ( ! self::_match_route()) error(404);
 			
 			ob_start();
 			call_user_func_array(self::$controller_function, self::$controller_params);
@@ -148,11 +148,11 @@ class Router {
 	}
 	
 	/**
-	 * Returns the current request URI.
+	 * Sets the current request URI.
 	 *
-	 * @return  string
+	 * @return  void
 	 */
-	private static function _uri()
+	private static function _set_uri()
 	{
 		$basepath_tokens = explode('/', BASE_PATH);
 		$uri_tokens      = explode('/', $_SERVER['REQUEST_URI']);
@@ -163,7 +163,7 @@ class Router {
 				unset($uri_tokens[$key]);
 		}
 		
-		return Router::$uri = ( ! empty($uri_tokens)) ? implode('/', $uri_tokens) : NULL;
+		Router::$uri = ( ! empty($uri_tokens)) ? implode('/', $uri_tokens) : NULL;
 	}
 	
 	/**
@@ -184,7 +184,7 @@ class Router {
 	 * @param   string  $uri
 	 * @return  bool
 	 */
-	private static function _match_route($uri)
+	private static function _match_route()
 	{
 		if (self::_has_routes())
 		{
@@ -193,7 +193,7 @@ class Router {
 				$pattern = '|^' . $route_uri . '$|';
 				$pattern = str_replace(self::$wildcards, self::$regexes, $pattern);
 				
-				if (preg_match($pattern, $uri, $matches) > 0)
+				if (preg_match($pattern, rtrim(self::_clean(self::$uri), '/'), $matches) > 0)
 				{
 					self::$controller_function = $controller_logic;
 					self::_set_params($matches);
