@@ -43,9 +43,9 @@
 Route::set('/', function()
 {
 	// You MUST define a route for this URI ('/'), though you're free to change
-	// this controller's logic and any views rendered.
-	// Your site will default to this route if the user does not supply a URI, 
-	// such as when visiting your site's home page (ex. http://yoursite.com/).
+	// this controller's logic and any views rendered. Your site will default to 
+	// this route if the user does not supply a URI, such as when visiting your 
+	// site's home page (ex. http://yoursite.com/).
 	
 	View::show('welcome');
 });

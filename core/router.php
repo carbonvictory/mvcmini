@@ -103,7 +103,9 @@ class Router {
 	 */
 	public static function define_route($uri, $controller_logic)
 	{
-		if ( ! is_callable($controller_logic)) error(500, "Invalid controller for '$uri'");
+		if ( ! is_callable($controller_logic)) 
+			error(500, "Invalid controller for '$uri'");
+		
 		self::$routes[self::_clean($uri)] = $controller_logic;
 	}
 	
@@ -127,7 +129,8 @@ class Router {
 		}
 		else
 		{
-			if ( ! self::_match_route()) error(404);
+			if ( ! self::_match_route()) 
+				error(404);
 			
 			ob_start();
 			call_user_func_array(self::$controller_function, self::$controller_params);
@@ -144,7 +147,7 @@ class Router {
 	public static function redirect($destination_uri)
 	{
 		header('Location:' . BASE_PATH . self::_clean($destination_uri));
-		exit();
+		exit;
 	}
 	
 	/**
@@ -197,6 +200,7 @@ class Router {
 				{
 					self::$controller_function = $controller_logic;
 					self::_set_params($matches);
+					
 					return TRUE;
 				}
 			}

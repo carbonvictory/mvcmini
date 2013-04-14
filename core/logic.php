@@ -64,14 +64,17 @@ class Logic {
 	public static function import($module_name, $params = NULL)
 	{
 		$module_name = self::_clean($module_name);
-		
 		$module_path = LOGIC_DIR . $module_name . '.php';
-		if ( ! file_exists($module_path)) error(500, "Missing logic module '$module_name'");
+		
+		if ( ! file_exists($module_path)) 
+			error(500, "Missing logic module '$module_name'");
+		
 		require_once $module_path;
 		
 		$module_name = explode('/', $module_name);
 		$module_name = array_pop($module_name);
 		$module_class_name = ucwords($module_name) . '_logic';
+		
 		self::$modules[$module_name] = new $module_class_name($params);
 	}
 	

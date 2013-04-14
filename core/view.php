@@ -47,10 +47,14 @@ class View {
 	 */
 	public static function show($view_name, $data = NULL)
 	{
-		if (is_array($data)) extract($data);
+		if (is_array($data)) 
+			extract($data);
 		
 		$view_path = VIEWS_DIR . self::_clean($view_name) . '.php';
-		if ( ! file_exists($view_path)) error(500, "Missing view '$view_path'");
+		
+		if ( ! file_exists($view_path)) 
+			error(500, "Missing view '$view_path'");
+		
 		require_once $view_path;
 	}
 	
