@@ -30,13 +30,16 @@ h1 span {
 	font-family:inherit
 }
 
-p {
+p, strong {
 	color:#333;
 	font:92% 'Open Sans', Helvetica, Arial, sans-serif;
 	margin-bottom:20px
 }
 
-strong { color:#555 }
+strong {
+	color:#555;
+	font-weight:700
+}
 
 pre {
 	background:#f8f8f8;
